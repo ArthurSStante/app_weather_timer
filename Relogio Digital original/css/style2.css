@@ -17,13 +17,13 @@ body{
     flex-direction: row;
 }
 
-.clima {
+/* .clima {
     display: flex;
     padding: 150px 200px 110px 200px;
     flex-direction: row;
     background-color: aquamarine;
     border-radius: 9px;
-}
+} */
 
 .timer {
     display: flex;
@@ -118,7 +118,7 @@ letter-spacing: 1px;
     text-align: center;
     padding: 20px 20px 50px;
     margin: 10% auto -1;
-    background-color: #546785;
+    background-color: #7092c9;
     border-radius: 9px;
 }
 .temp-content h1{
@@ -127,7 +127,7 @@ letter-spacing: 1px;
     color: #fff;    
 }
 .temp-content p{
-    color: #cfcfd9;
+    color: #d2d2e2;
 }
 .result{
     margin-bottom: 8%;
