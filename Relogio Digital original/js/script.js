@@ -1,53 +1,67 @@
-// const horas = document.getElementById('horas')
-// const minutos = document.getElementById('minutos')
-// const segundos = document.getElementById('segundos')
+const horas = document.getElementById('horas')
+const minutos = document.getElementById('minutos')
+const segundos = document.getElementById('segundos')
 
-// const relogio = setInterval(function time() {
-//     let dateToday = new Date()
-//     let hr = dateToday.getHours()
-//     let min = dateToday.getMinutes()
-//     let seg = dateToday.getSeconds()
+const relogio = setInterval(function time() {
+    let dateToday = new Date()
+    let hr = dateToday.getHours()
+    let min = dateToday.getMinutes()
+    let seg = dateToday.getSeconds()
 
-//     if(hr < 10 ){
-//         hr = '0'+ hr
-//     }
-//     if(min < 10 ){
-//         min = '0'+ min
-//     }
-//     if(seg < 10 ){
-//         seg = '0'+ seg
-//     }
+    if(hr < 10 ){
+        hr = '0'+ hr
+    }
+    if(min < 10 ){
+        min = '0'+ min
+    }
+    if(seg < 10 ){
+        seg = '0'+ seg
+    }
 
-//     horas.textContent = hr
-//     minutos.textContent = min
-//     segundos.textContent = seg
-// })
+    horas.textContent = hr
+    minutos.textContent = min
+    segundos.textContent = seg
+})
 
-// const dia = document.getElementById('dia')
-// const mes = document.getElementById('mes')
-// const ano = document.getElementById('ano')
+const dia = document.getElementById('dia')
+const mes = document.getElementById('mes')
+const ano = document.getElementById('ano')
 
-// const data = setInterval(function local() {
-//     let dateToday = new Date()
-//     let dia1 = dateToday.getDate()
-//     let mes1 = dateToday.getMonth() + 1
-//     let ano1 = dateToday.getFullYear()
+const data = setInterval(function local() {
+    let dateToday = new Date()
+    let dia1 = dateToday.getDate()
+    let mes1 = dateToday.getMonth() + 1
+    let ano1 = dateToday.getFullYear()
 
-//     if(dia1 < 10){
-//         dia1 = '0' + dia1
-//     }
-//     if(mes1 < 10){
-//         mes1 = '0' + mes1
-//     }
-//     if(ano1 < 10){
-//         ano1 = '0' + ano1
-//     }
+    switchColor(dateToday)
 
-//     dia.textContent = dia1
-//     mes.textContent = mes1
-//     ano.textContent = ano1
-// })
+    if(dia1 < 10){
+        dia1 = '0' + dia1
+    }
+    if(mes1 < 10){
+        mes1 = '0' + mes1
+    }
+    if(ano1 < 10){
+        ano1 = '0' + ano1
+    }
 
+    dia.textContent = dia1
+    mes.textContent = mes1
+    ano.textContent = ano1
+})
+
+function switchColor(dateToday) {
+    let currenthour = dateToday.getHours();
+    const clima = document.querySelector('.clima')
+
+    if (currenthour > 18) {
+        clima.style.backgroundColor = "#f2f600"
+    } else if (currenthour > 12) {
+        clima.style.backgroundColor = "#000000"
+    } else if (currenthour > 6) {
+        clima.style.backgroundColor = "#f2f600"
+    }
+}
 
 // fetch('https://restcountries.com/v3.1/all')
 //   .then(response => response.json())
@@ -60,8 +74,7 @@
 //         countrySelect.appendChild(option);
 //     });
 //   });
-
-
+  
 const result = document.querySelector('.result')
 const form = document.querySelector('.get-weather')
 const nameCity = document.querySelector('#city')
@@ -76,11 +89,7 @@ form.addEventListener('submit', (e) =>{
     }
 
     callAPI(nameCity.value, nameCountry.value)
-
-    callHours(nameCity.value)
-
 })
-
 function callAPI(city, countrySelect){
     const apiId ='d108789e363449e2f685c007633da5a6'
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${city},${countrySelect}&appid=${apiId}`
@@ -102,15 +111,12 @@ function callAPI(city, countrySelect){
             console.log(error)
         })
 }
-
 function showWeather(data){
     const {name, main:{temp, temp_min, temp_max}, weather:[arr]} = data;
-
 
     const degrees = kelvinTocentigrade(temp)
     const min = kelvinTocentigrade(temp_min)
     const max = kelvinTocentigrade(temp_max)
-
 
     const content = document.createElement('div');
     content.innerHTML= `
@@ -149,29 +155,4 @@ function kelvinTocentigrade(temp){
 
 function cleartHTML(){
     result.innerHTML = '';
-}
-
-function showHours(){
-
-}
-function callHours(city){
-
-    const timer= moment().timerzone(city).format('MMMM Do YYYY, h:mm:ss')
-    
-    const contentHours = document.createElement('div')
-    contentHours.innerHTML = `
-                    <div>
-                        <span id="horas">${timer}</span>
-                        <span class="tempo">Horas</span>
-                    </div>
-                    <div>
-                        <span id="minutos">00</span>
-                        <span class="tempo"">minutos</span>
-                    </div>
-                    <div>
-                        <span id="segundos">00</span>
-                        <span class="tempo"">segundos</span>
-                    </div>
-                    
-                    `
 }
